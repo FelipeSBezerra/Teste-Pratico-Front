@@ -27,26 +27,28 @@
 </template>
 
 <script>
+import UnidadeService from '@/services/UnidadeService.js'
+
 export default {
     name: 'UnidadeDeleteComponent',
-    data() {
-        return {
-            unidadeLocal: { ...this.unidade },
-        };
-    },
+
     props: {
         dialog: Boolean,
         unidade: Object,
     },
+    
     methods: {
         fecharDialog() {
             this.$emit('update:dialog', false);
         },
         excluir() {
-            // Lógica para excluir a unidade
-            this.fecharDialog();
+            UnidadeService.deletar(this.unidade.id).then(() => {
+                this.$emit('finalizado');
+                this.fecharDialog();
+            })
         },
     },
+
     computed: {
         dialogValue: {
             get() {
@@ -54,14 +56,6 @@ export default {
             },
             set(value) {
                 this.$emit('update:dialog', value);
-            },
-        },
-    },
-    watch: {
-        unidade: {
-            immediate: true,
-            handler(value) {
-                this.unidadeLocal = { ...value };
             },
         },
     },

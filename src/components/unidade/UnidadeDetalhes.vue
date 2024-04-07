@@ -12,22 +12,22 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <strong>Id:</strong> {{ unidadeLocal.id }}
+                            <strong>Id:</strong> {{ unidade.id }}
                         </v-col>
                     </v-row>
                     <v-row>
                         <v-col cols="12">
-                            <strong>Nome:</strong> {{ unidadeLocal.nome }}
+                            <strong>Nome:</strong> {{ unidade.nome }}
                         </v-col>
                     </v-row>
                     <v-row>
                         <v-col cols="12">
-                            <strong>Criado em:</strong> {{ unidadeLocal.createdAt }}
+                            <strong>Criado em:</strong> {{ unidade.createdAt }}
                         </v-col>
                     </v-row>
                     <v-row>
                         <v-col cols="12">
-                            <strong>Ultima atualização:</strong> {{ unidadeLocal.updatedAt }}
+                            <strong>Ultima atualização:</strong> {{ unidade.updatedAt }}
                         </v-col>
                     </v-row>
                 </v-container>
@@ -43,11 +43,7 @@
 <script>
 export default {
     name: 'UnidadeDetalhesComponent',
-    data() {
-        return {
-            unidadeLocal: { ...this.unidade },
-        };
-    },
+    
     props: {
         dialog: Boolean,
         unidade: Object,
@@ -55,10 +51,6 @@ export default {
     methods: {
         fecharDialog() {
             this.$emit('update:dialog', false);
-        },
-        salvar() {
-            // Lógica para salvar a unidade
-            this.fecharDialog();
         },
     },
     computed: {
@@ -68,14 +60,6 @@ export default {
             },
             set(value) {
                 this.$emit('update:dialog', value);
-            },
-        },
-    },
-    watch: {
-        unidade: {
-            immediate: true,
-            handler(value) {
-                this.unidadeLocal = { ...value };
             },
         },
     },

@@ -39,8 +39,8 @@
         </v-data-table>
 
         <UnidadeDetalhesComponent :dialog.sync="dialogDetalhes" :unidade="unidade"/>
-        <UnidadeAdicionarEditarComponent :dialog.sync="dialogAdionarEditar" :modo="modo" :unidade="unidade"/>
-        <UnidadeDeleteComponent :dialog.sync="dialogDelete" :unidade="unidade"/>
+        <UnidadeAdicionarEditarComponent :dialog.sync="dialogAdionarEditar" :modo="modo" :unidade="unidade" @finalizado="initialize"/>
+        <UnidadeDeleteComponent :dialog.sync="dialogDelete" :unidade="unidade" @finalizado="initialize"/>
         
     </v-card>
 </template>
@@ -50,7 +50,7 @@
 import UnidadeDetalhesComponent from '@/components/unidade/UnidadeDetalhes.vue'
 import UnidadeAdicionarEditarComponent from '@/components/unidade/UnidadeAdicionarEditar.vue'
 import UnidadeDeleteComponent from '@/components/unidade/UnidadeDelete.vue'
-import { getData } from '@/services/dataService.js';
+import UnidadeService from '@/services/UnidadeService.js'
 export default {
     name: 'UnidadesView',
 
@@ -87,9 +87,7 @@ export default {
 
     methods: {
         initialize() {
-            getData().then((data) => {
-                this.unidadeList = data;
-            });
+            this.buscarTodos();
         },
 
         preparaAdicionar() {
@@ -114,6 +112,12 @@ export default {
             this.unidade = item;
         },
 
-    }
+        buscarTodos() {
+            UnidadeService.buscarTodos().then((resposta) => {
+                this.unidadeList = resposta.data
+            });
+        }
+
+    },
 };
 </script>

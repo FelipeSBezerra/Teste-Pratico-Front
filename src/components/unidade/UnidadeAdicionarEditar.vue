@@ -12,8 +12,8 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field color="orange" label="Nome"  placeholder="nome" v-model="unidadeLocal.nome"
-                                hint="nome para unidade"></v-text-field>
+                            <v-text-field ref="nome" color="orange" label="Nome"  placeholder="nome" v-model="unidadeLocal.nome"
+                                hint="nome para unidade" :rules="[v => !!v || 'Campo obrigatório']"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -21,13 +21,15 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red darken-1" text @click="fecharDialog">Cancelar</v-btn>
-                <v-btn color="green darken-3" text @click="salvar">Salvar</v-btn>
+                <v-btn color="green darken-3" text @click="salvar" :disabled="!unidadeLocal.nome || unidadeLocal.nome.length === 0">Salvar</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
 
 <script>
+import UnidadeService from '@/services/UnidadeService.js'
+
 export default {
     name: 'UnidadeAdicionarEditarComponent',
     data() {
@@ -48,11 +50,24 @@ export default {
     },
     methods: {
         fecharDialog() {
+            this.unidadeLocal = {};
+            this.$refs.nome.resetValidation();
             this.$emit('update:dialog', false);
         },
         salvar() {
-            // Lógica para salvar a unidade
-            this.fecharDialog();
+            let unidade = {nome: this.unidadeLocal.nome}
+
+            if (this.modo == 'Adicionar') {
+                UnidadeService.salvar(unidade).then(() => {
+                    this.$emit('finalizado');
+                    this.fecharDialog();
+                })
+                } else {
+                    UnidadeService.atualizar(this.unidadeLocal.id ,unidade).then(() => {
+                        this.$emit('finalizado');
+                        this.fecharDialog();
+                    })
+                } 
         },
     },
     computed: {
