@@ -126,7 +126,6 @@ export default {
                 this.unidadeList = resposta.data
             }).catch((erro) => {
                 if (erro.request && !erro.response) {
-                    console.log('Passou por aqui')
                     this.mensagemToast('Erro na canexão com o servidor. Verifique se a API está em execução', 'red', 5000)
                 }
             });
