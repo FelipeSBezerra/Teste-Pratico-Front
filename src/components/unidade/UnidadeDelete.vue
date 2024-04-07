@@ -43,7 +43,7 @@ export default {
         },
         excluir() {
             UnidadeService.deletar(this.unidade.id).then(() => {
-                this.$emit('finalizado');
+                this.$emit('finalizado', 'Excluido com sucesso', 'green');
                 this.fecharDialog();
             })
         },

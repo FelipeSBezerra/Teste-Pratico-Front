@@ -39,9 +39,8 @@
         </v-data-table>
 
         <UnidadeDetalhesComponent :dialog.sync="dialogDetalhes" :unidade="unidade"/>
-        <UnidadeAdicionarEditarComponent :dialog.sync="dialogAdionarEditar" :modo="modo" :unidade="unidade" @finalizado="initialize"/>
-        <UnidadeDeleteComponent :dialog.sync="dialogDelete" :unidade="unidade" @finalizado="initialize"/>
-        
+        <UnidadeAdicionarEditarComponent :dialog.sync="dialogAdionarEditar" :modo="modo" :unidade="unidade" @finalizado="acaoRealizada"/>
+        <UnidadeDeleteComponent :dialog.sync="dialogDelete" :unidade="unidade" @finalizado="acaoRealizada"/>        
     </v-card>
 </template>
 
@@ -57,7 +56,7 @@ export default {
     components: {
         UnidadeDetalhesComponent,
         UnidadeAdicionarEditarComponent,
-        UnidadeDeleteComponent
+        UnidadeDeleteComponent,
     },
 
     data() {
@@ -90,6 +89,16 @@ export default {
             this.buscarTodos();
         },
 
+
+        acaoRealizada(mensagem, cor) {
+            this.initialize()
+            this.mensagemToast(mensagem, cor)
+        },
+
+        mensagemToast(mensagem, cor, timeout = 3000) {
+            this.$emit('mensagemToast', mensagem, cor, timeout);
+        },
+
         preparaAdicionar() {
             this.modo = 'Adicionar';
             this.dialogAdionarEditar = true;
@@ -115,6 +124,11 @@ export default {
         buscarTodos() {
             UnidadeService.buscarTodos().then((resposta) => {
                 this.unidadeList = resposta.data
+            }).catch((erro) => {
+                if (erro.request && !erro.response) {
+                    console.log('Passou por aqui')
+                    this.mensagemToast('Erro na canexão com o servidor. Verifique se a API está em execução', 'red', 5000)
+                }
             });
         }
 

@@ -59,12 +59,12 @@ export default {
 
             if (this.modo == 'Adicionar') {
                 UnidadeService.salvar(unidade).then(() => {
-                    this.$emit('finalizado');
+                    this.$emit('finalizado', 'Cadastrado com sucesso', 'green');
                     this.fecharDialog();
                 })
                 } else {
                     UnidadeService.atualizar(this.unidadeLocal.id ,unidade).then(() => {
-                        this.$emit('finalizado');
+                        this.$emit('finalizado', 'Atualizado com sucesso', 'green');
                         this.fecharDialog();
                     })
                 } 

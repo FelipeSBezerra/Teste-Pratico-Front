@@ -1,8 +1,9 @@
 <template>
   <v-app>
+    <ToastComponent ref="toast" :snackbar="snackbar" :mensagem="mensagem" :timeout="timeout" :cor="cor"/>
     <MenuBarComponent/>
     <v-main class="ma-10">
-      <router-view></router-view>
+      <router-view @mensagemToast="mensagemToast"></router-view>
     </v-main>
     <FooterComponent/>
   </v-app>
@@ -11,6 +12,7 @@
 <script>
 import FooterComponent from './components/FooterComponent.vue';
 import MenuBarComponent from './components/MenuBarComponent.vue';
+import ToastComponent from './components/ToastComponent.vue'
 
 
 export default {
@@ -18,11 +20,22 @@ export default {
 
   components: {
     FooterComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    ToastComponent
   },
 
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+        cor: 'success',
+        snackbar: false,
+        timeout: -1,
+        mensagem: ''
+    }
+  },
+  methods: {
+    mensagemToast(mensagem, cor, time) {
+        this.$refs.toast.showToast(mensagem, cor, time);
+    }
+    },
 };
 </script>
