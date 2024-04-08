@@ -9,8 +9,7 @@
         <v-card-subtitle> Consultar </v-card-subtitle>
         <v-divider class="mx-4"></v-divider>
 
-        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeListFormatada" sort-by="id
-        " class="elevation-2 mt-4">
+        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeListFormatada" order-by="id" class="elevation-2 mt-4">
             <template v-slot:top>
                 <v-toolbar flat>
                     <v-toolbar-title style="width: 100%;">
@@ -32,8 +31,8 @@
                 </v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">
-                    Reset
+                <v-btn v-if="falhaConexaoApi" color="secondary" @click="initialize">
+                    Tentar novamente
                 </v-btn>
             </template>
         </v-data-table>
@@ -66,6 +65,7 @@ export default {
             dialogAdionarEditar: false,
             dialogDetalhes: false,
             dialogDelete: false,
+            falhaConexaoApi: false,
             modo: 'Adicionar',
             busca: '',
             Cabecalhos: [
@@ -125,9 +125,11 @@ export default {
 
         buscarTodos() {
             UnidadeService.buscarTodos().then((resposta) => {
+                this.falhaConexaoApi = false
                 this.unidadeList = resposta.data
             }).catch((erro) => {
                 if (erro.request && !erro.response) {
+                    this.falhaConexaoApi = true
                     this.mensagemToast('Erro na canexão com o servidor. Verifique se a API está em execução', 'red', 5000)
                 }
             });

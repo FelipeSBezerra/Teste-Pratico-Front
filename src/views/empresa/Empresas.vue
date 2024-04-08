@@ -25,7 +25,7 @@
               <v-text-field color="orange" v-mask="'#####-###'" v-model="parametros.cep" label="CEP" filled></v-text-field>
             </v-col>
 
-            <v-col cols="12" sm="6" md="4" class="text-left">
+            <v-col cols="12" sm="9" class="text-left">
               <v-btn color="success" class="mr-4" @click="buscarTodosComParametros">
                 <v-icon class="mr-1">mdi-magnify</v-icon>Consultar
               </v-btn>
@@ -35,7 +35,7 @@
               </v-btn>
             </v-col>
 
-            <v-col cols="12" sm="6" md="8" class="text-right">
+            <v-col cols="12" sm="3" class="text-right">
               <v-btn class="success" to="/empresa">Adicionar</v-btn>
             </v-col>
           </v-row>
@@ -44,7 +44,7 @@
       </div>
     </v-card-text>
 
-    <v-data-table :search="busca" :headers="Cabecalhos" :items="empresaListFormatada" sort-by="id" :sort-desc="true"
+    <v-data-table :search="busca" :headers="Cabecalhos" :items="empresaListFormatada" sort-by="id"
         class="elevation-2">
       <template v-slot:top>
         <v-toolbar flat>

@@ -3,7 +3,7 @@
     <v-flex text-xs-center>
       <v-img src="../../assets/logo.jpg"  class="mx-auto mb-12" max-width="400px"></v-img>
       <h1>Felipe S. Bezerra</h1>
-      <h3>Teste técnico Java Jr</h3>
+      <h4>Teste Desenvolvedor Java Jr</h4>
     </v-flex>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped>
-h1, h3 {
+h1, h4 {
   text-align: center;
 }
 .main {
