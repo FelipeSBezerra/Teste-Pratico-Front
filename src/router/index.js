@@ -4,11 +4,17 @@ import EmpresasView from '../views/empresa/Empresas.vue'
 import LeiloesView from '../views/leilao/Leiloes.vue'
 import UnidadesView from '../views/unidade/Unidades.vue'
 import EmpresaAdicionarEditarView from '../views/empresa/EmpresaAdicionarEditar.vue'
+import HomeView from '../views/home/Home.vue'
 
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/home',
+    name: 'home',
+    component: HomeView
+  },
   {
       path: '/unidades',
       name: 'unidades',
@@ -36,7 +42,7 @@ const routes = [
   },
   {
       path: '*',
-      redirect: '/unidades'
+      redirect: '/home'
   }
 ]
 

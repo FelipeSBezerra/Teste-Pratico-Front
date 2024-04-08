@@ -1,6 +1,8 @@
 <template>
     <v-app-bar app dark elevation="2" class="navbar">
-      <v-toolbar-title class="logo">FS</v-toolbar-title>
+      <router-link to="/home" class="link">
+        <v-toolbar-title class="logo">FS</v-toolbar-title>
+      </router-link>
       <v-divider vertical class="mx-4"></v-divider>
       <v-spacer></v-spacer>
       <v-btn plain color="orange" to="/unidades">Unidades</v-btn>
@@ -15,6 +17,10 @@
     font-weight: bold;
     padding-right: 16px;
     font-size: 1.5rem;
+  }
+
+  .link {
+  text-decoration: none;
   }
   
   .navbar {
