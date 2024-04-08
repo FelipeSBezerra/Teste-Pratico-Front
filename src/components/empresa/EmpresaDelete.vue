@@ -43,7 +43,7 @@ export default {
         },
         excluir() {
             EmpresaService.deletar(this.empresa.id).then(() => {
-                this.$emit('finalizado', 'Excluida com sucesso', 'green');
+                this.$emit('finalizado', 'Excluida com sucesso', 'green', true);
                 this.fecharDialog();
             }).catch((erro) => {
                 this.$emit('finalizado', erro.response.data.message, 'red');

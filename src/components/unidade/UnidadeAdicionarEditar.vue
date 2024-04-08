@@ -37,6 +37,7 @@ export default {
             unidadeLocal: { ...this.unidade },
         };
     },
+
     props: {
         dialog: Boolean,
         modo: {
@@ -48,10 +49,9 @@ export default {
         },
         unidade: Object,
     },
+
     methods: {
         fecharDialog() {
-            this.unidadeLocal = {};
-            this.$refs.nome.resetValidation();
             this.$emit('update:dialog', false);
         },
         salvar() {
@@ -70,6 +70,7 @@ export default {
                 } 
         },
     },
+
     computed: {
         dialogValue: {
             get() {
@@ -80,11 +81,17 @@ export default {
             },
         },
     },
+
     watch: {
         unidade: {
             immediate: true,
             handler(value) {
                 this.unidadeLocal = { ...value };
+                this.$nextTick(() => {
+                if (this.$refs.nome) {
+                    this.$refs.nome.resetValidation();
+                }
+            });
             },
         },
     },

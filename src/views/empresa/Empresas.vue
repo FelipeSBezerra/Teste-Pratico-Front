@@ -44,7 +44,7 @@
       </div>
     </v-card-text>
 
-    <v-data-table :search="busca" :headers="Cabecalhos" :items="empresaList" sort-by="id" :sort-desc="true"
+    <v-data-table :search="busca" :headers="Cabecalhos" :items="empresaListFormatada" sort-by="id" :sort-desc="true"
         class="elevation-2">
       <template v-slot:top>
         <v-toolbar flat>
@@ -80,6 +80,7 @@
 import EmpresaService from '@/services/EmpresaService'
 import EmpresaDeleteComponent from '@/components/empresa/EmpresaDelete.vue'
 import EmpresaDetalhesComponent from '@/components/empresa/EmpresaDetalhes.vue'
+import { formatarData } from '@/utils/DataFormatter'
 export default {
   name: 'EmpresasView',
 
@@ -107,6 +108,7 @@ export default {
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     parametros: {},
+    parametroUltimaBusca: {},
     empresaList: [],
     empresa: {},
   }),
@@ -120,6 +122,7 @@ export default {
     },
 
     buscarTodosComParametros() {
+      this.parametroUltimaBusca = this.parametros
       EmpresaService.buscarTodos(this.parametros).then((resposta) => {
         this.empresaList = resposta.data;
         if (this.empresaList.length == 0) {
@@ -128,7 +131,11 @@ export default {
       })
     },
 
-    acaoRealizada(mensagem, cor) {
+    acaoRealizada(mensagem, cor, atualizarlista) {
+        if (atualizarlista) {
+          this.parametros = {...this.parametroUltimaBusca}
+          this.buscarTodosComParametros()
+        }
         this.mensagemToast(mensagem, cor)
     },
 
@@ -149,6 +156,18 @@ export default {
       this.dialogDelete = true;
       this.empresa = item
     },
+  },
+
+  computed: {
+
+    empresaListFormatada() {
+    return this.empresaList.map(empresa => ({
+          ...empresa,
+          createdAt: formatarData(empresa.createdAt),
+          updatedAt: formatarData(empresa.updatedAt),
+        })
+      );
+    }
   },
 };
 </script>

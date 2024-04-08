@@ -17,7 +17,7 @@
               </v-btn>
 
               <v-btn color="secondary" @click="reset" outlined>
-                <v-icon class="mr-1">mdi-backspace-reverse</v-icon>Limpar campo
+                <v-icon class="mr-1">mdi-backspace-reverse</v-icon>Limpar Parâmetro
               </v-btn>
             </v-col>
           </v-row>

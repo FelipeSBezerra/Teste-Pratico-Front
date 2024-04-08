@@ -9,7 +9,7 @@
         <v-card-subtitle> Consultar </v-card-subtitle>
         <v-divider class="mx-4"></v-divider>
 
-        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeList" sort-by="id
+        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeListFormatada" sort-by="id
         " class="elevation-2 mt-4">
             <template v-slot:top>
                 <v-toolbar flat>
@@ -50,6 +50,8 @@ import UnidadeDetalhesComponent from '@/components/unidade/UnidadeDetalhes.vue'
 import UnidadeAdicionarEditarComponent from '@/components/unidade/UnidadeAdicionarEditar.vue'
 import UnidadeDeleteComponent from '@/components/unidade/UnidadeDelete.vue'
 import UnidadeService from '@/services/UnidadeService.js'
+import { formatarData } from '@/utils/DataFormatter'
+
 export default {
     name: 'UnidadesView',
 
@@ -131,6 +133,18 @@ export default {
             });
         }
 
+    },
+
+    computed: {
+
+        unidadeListFormatada() {
+        return this.unidadeList.map(unidade => ({
+                    ...unidade,
+                    createdAt: formatarData(unidade.createdAt),
+                    updatedAt: formatarData(unidade.updatedAt),
+                })
+            );
+        }
     },
 };
 </script>
