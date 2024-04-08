@@ -1,24 +1,26 @@
-# teste-pratico-front
+# Teste Técnico Front-end Leilão
 
-## Project setup
+### OBS: Para o desenvolvimento, foram seguidas as instruções do README da Avaliação
+
+## Setup do projeto
+
+Para configurar o projeto e baixar as dependências, siga os passos abaixo:
+
+1. Certifique-se de ter o Node.js e o npm instalados em sua máquina.
+2. Abra um terminal e navegue até o diretório raiz do projeto.
+3. Execute o comando a seguir para baixar as dependências:
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Inicie o servidor
+
+Após baixar as dependências, execute o comando a seguir para iniciar o servidor:
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+O servidor será iniciado e estará disponível na porta 9091.
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
