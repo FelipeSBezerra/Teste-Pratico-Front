@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import EmpresasView from '../views/empresa/Empresas.vue'
 import LeiloesView from '../views/leilao/Leiloes.vue'
 import UnidadesView from '../views/unidade/Unidades.vue'
-import EmpresaAdicionarEditarView from '../views/empresa/EmpresaAdicionarEditar.vue'
+import EmpresaView from '../views/empresa/Empresa.vue'
 import HomeView from '../views/home/Home.vue'
 
 
@@ -33,12 +33,12 @@ const routes = [
   {
     path: '/empresa',
     name: 'empresa',
-    component: EmpresaAdicionarEditarView
+    component: EmpresaView
   },
   {
     path: '/empresa/:id',
     name: 'empresaEdit',
-    component: EmpresaAdicionarEditarView
+    component: EmpresaView
   },
   {
       path: '*',

@@ -9,7 +9,7 @@
         <v-card-subtitle> Consultar </v-card-subtitle>
         <v-divider class="mx-4"></v-divider>
 
-        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeListFormatada" order-by="id" class="elevation-2 mt-4">
+        <v-data-table :search="busca" :headers="Cabecalhos" :items="unidadeListFormatada" sort-by="id" class="elevation-2 mt-4">
             <template v-slot:top>
                 <v-toolbar flat>
                     <v-toolbar-title style="width: 100%;">

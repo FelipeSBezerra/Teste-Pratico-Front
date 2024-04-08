@@ -93,7 +93,7 @@
   
   import EmpresaService from '@/services/EmpresaService'
   export default {
-    name: 'EmpresaAdicionarEditarView',
+    name: 'EmpresaView',
   
     data() {
       return {

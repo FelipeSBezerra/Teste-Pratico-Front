@@ -83,6 +83,11 @@ export default {
     },
 
     watch: {
+        dialog(value) {
+            if (value) {
+                this.unidadeLocal = {...this.unidade}
+            }
+        },
         unidade: {
             immediate: true,
             handler(value) {
